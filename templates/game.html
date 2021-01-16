@@ -1,13 +1,17 @@
 {% extends "base.html" %}
 {% block body %}
 
-<div class="decks">
+<div class="piles">
+    <div class="pile discarded">
 {% for i in range(5) %}
-    <div class="card deck deck-{{ loop.revindex0 }}">&nbsp;</div>
+        <div class="card discarded card-{{ loop.revindex0 }}">&nbsp;</div>
 {% endfor %}
+    </div>
+    <div class="pile deck">
 {% for i in range(5) %}
-    <div class="card discarded discarded-{{ loop.index0 }}">&nbsp;</div>
+        <div class="card deck card-{{ loop.revindex0 }}">&nbsp;</div>
 {% endfor %}
+    </div>
     <div class="card drawn">&nbsp;</div>
 </div>
 

@@ -5,7 +5,7 @@ body
     margin:0;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
-        "p1 decks decks p2"
+        "p1 piles piles p2"
         "p6 p5 p4 p3";
 
     place-items: center;
@@ -14,11 +14,30 @@ body
     font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
 }
 
-.decks
+.piles
 {
-    grid-area: decks;
-    position: relative;
-    width:32em;
+    position:relative;
+    grid-area: piles;
+    display:grid;
+    width:500px;height:300px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "discarded deck"
+}
+
+.pile {
+    position:relative;
+    width:100%;
+    height:100%;
+}
+
+.pile.discarded
+{
+    grid-area: discarded;
+}
+
+.pile.deck
+{
+    grid-area: deck;
 }
 
 .card
@@ -47,29 +66,18 @@ body
     position:absolute;
 }
 
-.card.discarded.discarded-0 { left:0px; top:0px; }
-.card.discarded.discarded-1 { left:-10px; top:-15px; }
-.card.discarded.discarded-2 { left:-20px; top:-30px; }
-.card.discarded.discarded-3 { left:-30px; top:-45px; }
-.card.discarded.discarded-4 { left:-40px; top:-60px; }
-
-.card.deck.deck-0 { right:40px; top:0px; }
-.card.deck.deck-1 { right:30px; top:-15px; }
-.card.deck.deck-2 { right:20px; top:-30px; }
-.card.deck.deck-3 { right:10px; top:-45px; }
-.card.deck.deck-4 { right:0px; top:-60px; }
-
-.card.deck
-{
-    right:0; top:0;
-}
+.card.card-0 { left:0px; top:0px; }
+.card.card-1 { left:6px; top:8px; }
+.card.card-2 { left:12px; top:16px; }
+.card.card-3 { left:18px; top:24px; }
+.card.card-4 { left:24px; top:32px; }
 
 .card.drawn
 {
-    grid-area: deck;
-    position: absolute;
-    right:60px;
-    top:40px;
+    grid-area: piles;
+    left:50%;
+    top:50%;
+    margin-left:-100px;
 }
 
 .card[data-value="-2"], .card[data-value="-1"]

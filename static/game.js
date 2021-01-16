@@ -54,9 +54,11 @@ function update_active_player()
 
 function update_discarded_pile()
 {
-    for (let i=0; i<state.discard_pile.length; i++)
+    let pile = [].concat(state.discard_pile).reverse();
+    $(".card.discarded").hide();
+    for (let i=0; i<pile.length; i++)
     {
-        set_card_value(".card.discarded-"+i, state.discard_pile[i]);
+        set_card_value(".card.discarded.card-"+i, pile[i]).show();
     }
 }
 
