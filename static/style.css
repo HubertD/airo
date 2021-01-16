@@ -1,0 +1,125 @@
+body
+{
+    display:grid;
+    height:100%;width:100%;
+    margin:0;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+        "p1 discarded deck p2"
+        "p6 p5 p4 p3";
+
+    place-items: center;
+
+
+    background-color:#333;
+    color:white;
+    font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+}
+
+.card
+{
+    border-radius: 10px;
+    border: 2px solid black;
+    font-size: 50px;
+    text-align: center;
+    background-color:#666;
+    color:white;
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+
+    width:1.6em;
+    height:2.4em;
+    margin:5px 5px 0 5px;
+    cursor:pointer;
+}
+
+.card.discarded, .card.deck
+{
+    font-size:130px;
+}
+
+.card.discarded
+{
+    grid-area: discarded;
+    justify-self: right;
+    margin-right:20px;
+}
+
+.card.deck
+{
+    grid-area: deck;
+    justify-self: left;
+    margin-left:20px;
+}
+
+.card[data-value="-2"], .card[data-value="-1"]
+{
+    background-color:#383c88;
+}
+
+.card[data-value="0"]
+{
+    background-color:#6cd0ee;
+}
+
+.card[data-value="1"], .card[data-value="2"], .card[data-value="3"], .card[data-value="4"]
+{
+    background-color:#5fb32a;
+}
+
+.card[data-value="5"], .card[data-value="6"], .card[data-value="7"], .card[data-value="8"]
+{
+    background-color:#f4e818;
+}
+
+.card[data-value="9"], .card[data-value="10"], .card[data-value="11"], .card[data-value="12"]
+{
+    background-color:#d6261b;
+}
+
+.hand
+{
+    display:grid;
+    grid-template-columns: 100px 100px 100px 100px;
+    padding:1em;
+
+    grid-template-areas:
+        "header header header header"
+        "state state state state"
+        "a0 a3 a6 a9"
+        "a1 a4 a7 a10"
+        "a2 a5 a8 a11";
+}
+
+.hand.active
+{
+    background-color:#802020;
+}
+
+.hand .card
+{
+    position:relative;
+}
+
+.hand header {
+    grid-area: header;
+    text-align: center;
+}
+
+.hand .state {
+    grid-area: state;
+    text-align: center;
+}
+
+.dialog {
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:400px;
+    height:300px;
+    margin-left:-200px;
+    margin-top:-150px;
+}

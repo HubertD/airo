@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block body %}
+
+<h1>{{ game.name }}</h1>
+
+<table>
+    <thead>
+        <th>Round</th>
+{% for p in game.players %}
+        <th>{{ p.name }}</th>
+{% endfor %}
+    </thead>
+    <tbody>
+{% for round in range(game.players[0].results|length) %}
+    <tr>
+        <td>{{ round + 1 }}</td>
+    {% for p in game.players %}
+        <td>{{ p.results[round] }}</td>
+    {% endfor %}
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+
+<button class="next_round">Start next round</button>
+
+<script>
+    function update_round_finished()
+    {
+        $.get(urls['state']).done(function(data) {
+            if (data.state != 'State.ROUND_FINISHED')
+            {
+                location.href = urls['main'];
+            }
+            else
+            {
+                window.setTimeout(update_round_finished, 500);
+            }
+        });
+    }
+
+    $("button.next_round").click(function() {
+        $.post(urls['next_round']);
+        $(this).prop("disabled", true);
+    });
+
+    window.setTimeout(update_round_finished, 500);
+</script>
+{% endblock body %}

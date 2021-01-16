@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body>
+        <script>
+            let urls = {
+            {% for s in ['main', 'state', 'take_deck', 'take_discarded', 'put', 'reveal', 'keep', 'round_finished', 'next_round'] %}
+                '{{s}}': '{{ url_for(s, session=session) }}',
+            {% endfor %}
+            };
+        </script>
+
+        <script src="{{ url_for('static', filename='jquery-3.5.1.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='game.js') }}"></script>
+
+        {% block body %}
+        {% endblock %}
+
+    </body>
+</html>

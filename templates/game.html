@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block body %}
+
+<div class="card discarded">&nbsp;</div>
+<div class="card deck">&nbsp;</div>
+
+{% for player in game.players %}
+<div class="hand" data-player="{{ player.name }}">
+    <header>{{ player.name }}</header>
+    <div class="state">state</div>
+    {% for i in range(12) %}
+    <div class="card" data-card-index="{{ i }}" style="grid-area:a{{ i }}">&nbsp;</div>
+    {% endfor %}
+</div>
+{% endfor %}
+
+<div class="dialog keep_discard">
+    <h2>Keep or discard?</h2>
+    <div class="card">&nbsp;</div>
+    <button class="discard">discard</button>
+</div>
+
+<script>
+    $(function() {
+        $(".dialog.keep_discard button.discard").click(function() {
+            $.post('{{ url_for('discard', session=session) }}', {}).done(update_state);
+        })
+        update();
+    });
+</script>
+
+{% endblock body %}
