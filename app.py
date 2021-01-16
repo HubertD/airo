@@ -47,12 +47,6 @@ def main(session):
     return render_template(tpl, game=game, player=player, session=session)
 
 
-@app.route('/<session>/round_finished')
-def round_finished(session):
-    game, player = get_data(session)
-    return render_template('round_finished.html', game=game, player=player, session=session)
-
-
 @app.route('/join', methods=['POST'])
 def join():
     session = request.form['game']
@@ -129,4 +123,4 @@ def next_round(session):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')

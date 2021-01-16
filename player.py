@@ -27,7 +27,8 @@ class Player:
             'state': str(self.state),
             'cards': self.get_revealed_cards(),
             'drawn': self.drawn,
-            'results': self.results
+            'results': self.results,
+            'sum_results': sum(self.results),
         }
 
     def get_revealed_cards(self):

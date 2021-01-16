@@ -7,7 +7,7 @@
     <body>
         <script>
             let urls = {
-            {% for s in ['main', 'state', 'take_deck', 'take_discarded', 'put', 'reveal', 'keep', 'round_finished', 'next_round'] %}
+            {% for s in ['main', 'state', 'take_deck', 'take_discarded', 'put', 'reveal', 'keep', 'discard', 'next_round'] %}
                 '{{s}}': '{{ url_for(s, session=session) }}',
             {% endfor %}
             };

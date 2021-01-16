@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 {% block body %}
 
-<div class="card discarded">&nbsp;</div>
-<div class="card deck">&nbsp;</div>
+<div class="decks">
+{% for i in range(5) %}
+    <div class="card deck deck-{{ loop.revindex0 }}">&nbsp;</div>
+{% endfor %}
+{% for i in range(5) %}
+    <div class="card discarded discarded-{{ loop.index0 }}">&nbsp;</div>
+{% endfor %}
+    <div class="card drawn">&nbsp;</div>
+</div>
 
 {% for player in game.players %}
-<div class="hand" data-player="{{ player.name }}">
+<div class="hand" data-player="{{ player.name }}" data-player-index="{{ loop.index0 }}">
     <header>{{ player.name }}</header>
     <div class="state">state</div>
     {% for i in range(12) %}
@@ -14,17 +21,35 @@
 </div>
 {% endfor %}
 
-<div class="dialog keep_discard">
-    <h2>Keep or discard?</h2>
-    <div class="card">&nbsp;</div>
-    <button class="discard">discard</button>
-</div>
+<div class="dialog results">
+<h1>Round finished</h1>
+<table>
+    <thead>
+        <th>Round</th>
+{% for p in game.players %}
+        <th>{{ p.name }}</th>
+{% endfor %}
+    </thead>
+    <tbody>
+    </tbody>
+    <tfoot>
+        <th>Sum</th>
+{% for p in game.players %}
+        <th></th>
+{% endfor %}
+    </tfoot>
+</table>
 
+<button class="next_round">Start next round</button>
+
+</div>
 <script>
     $(function() {
-        $(".dialog.keep_discard button.discard").click(function() {
-            $.post('{{ url_for('discard', session=session) }}', {}).done(update_state);
-        })
+        $(".next_round").click(function()
+        {
+            $(".results button.next_round").prop("disabled", true);
+            next_round();
+        });
         update();
     });
 </script>
