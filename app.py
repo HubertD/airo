@@ -85,13 +85,6 @@ def take_deck(session):
     return get_state(game, player)
 
 
-@app.route('/<session>/keep', methods=['POST'])
-def keep(session):
-    game, player = get_data(session=session)
-    game.keep(player=player)
-    return get_state(game, player)
-
-
 @app.route('/<session>/discard', methods=['POST'])
 def discard(session):
     game, player = get_data(session=session)

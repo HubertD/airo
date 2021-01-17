@@ -90,6 +90,20 @@ function show_results()
     $('.results').show();
 }
 
+function update_drawn_card()
+{
+    const player = state.players[state.active_player];
+
+    if (player.drawn !== null)
+    {
+        set_card_value(".card.drawn", player.drawn).show();
+    }
+    else
+    {
+        $(".card.drawn").hide();
+    }
+}
+
 function update_state(data)
 {
     state = data;
@@ -97,6 +111,7 @@ function update_state(data)
 
     update_active_player()
     update_discarded_pile();
+    update_drawn_card();
 
     for (const player of state.players)
     {
@@ -119,9 +134,8 @@ function update_state(data)
         hide_results();
     }
 
+
     $(".card").unbind();
-    set_card_value(".card.deck", null);
-    $(".card.drawn").hide();
 
     if (self.state == STATE_REVEAL_FIRST)
     {
@@ -142,7 +156,7 @@ function update_state(data)
     }
     else if (self.state == STATE_DECIDE_KEEP_OR_DISCARD)
     {
-        set_card_value(".card.drawn", self.drawn).show().click(keep);
+        get_cards(state.self.name).click(put);
         $(".card.discarded").click(discard);
     }
     else if (self.state == STATE_DECIDE_WHICH_CARD_TO_REVEAL)
@@ -172,11 +186,6 @@ function put()
 function reveal()
 {
     $.post(urls['reveal'], { card_index: $(this).attr('data-card-index') }).done(update_state);
-}
-
-function keep()
-{
-    $.post(urls['keep']).done(update_state);
 }
 
 function discard()

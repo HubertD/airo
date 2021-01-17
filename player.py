@@ -55,10 +55,6 @@ class Player:
         self.drawn = card
         self.state = Player.State.DECIDE_KEEP_OR_DISCARD
 
-    def keep(self):
-        assert(self.state == Player.State.DECIDE_KEEP_OR_DISCARD)
-        self.state = Player.State.DECIDE_WHERE_TO_PUT
-
     def discard(self) -> int:
         assert(self.state == Player.State.DECIDE_KEEP_OR_DISCARD)
         self.state = Player.State.DECIDE_WHICH_CARD_TO_REVEAL
@@ -67,7 +63,7 @@ class Player:
         return card
 
     def put(self, card_index: int) -> int:
-        assert(self.state == Player.State.DECIDE_WHERE_TO_PUT)
+        assert(self.state in [Player.State.DECIDE_WHERE_TO_PUT, Player.State.DECIDE_KEEP_OR_DISCARD])
         assert(card_index < len(self.cards))
         old = self.cards[card_index]
         self.cards[card_index] = self.drawn

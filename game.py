@@ -91,10 +91,6 @@ class Game:
         assert(self.state == Game.State.RUNNING)
         self.assert_my_turn(player).take_deck(self.draw_card_from_deck())
 
-    def keep(self, player: Player):
-        assert(self.state == Game.State.RUNNING)
-        self.assert_my_turn(player).keep()
-
     def discard(self, player: Player):
         assert(self.state == Game.State.RUNNING)
         self.discard_card(self.assert_my_turn(player).discard())
